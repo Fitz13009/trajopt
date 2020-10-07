@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# @Filename: ilqr
-# @Date: 2019-06-23-14-00
-# @Author: Hany Abdulsamad
-# @Contact: hany@robot-learning.de
-
 import autograd.numpy as np
 
 from trajopt.bspilqr.objects import Gaussian
@@ -126,7 +119,7 @@ class BSPiLQR:
             plt.plot(t, self.bref.mu[k, :], '-b')
             lb = self.bref.mu[k, :] - 2. * np.sqrt(self.bref.sigma[k, k, :])
             ub = self.bref.mu[k, :] + 2. * np.sqrt(self.bref.sigma[k, k, :])
-            plt.fill_between(t, lb, ub, color='blue', alpha='0.1')
+            plt.fill_between(t, lb, ub, color='blue', alpha=0.1)
 
         t = np.linspace(0, self.nb_steps, self.nb_steps)
         for k in range(self.dm_act):

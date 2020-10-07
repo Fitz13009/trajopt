@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# @Filename: objects.py
-# @Date: 2019-06-22-15-01
-# @Author: Hany Abdulsamad
-# @Contact: hany@robot-learning.de
-
 import autograd.numpy as np
 from autograd import jacobian, hessian
 from copy import deepcopy
@@ -101,17 +94,13 @@ class LinearDynamics:
 
 
 class AnalyticalLinearDynamics(LinearDynamics):
-    def __init__(self, f_init, f_dyn, dm_state, dm_act, nb_steps):
+    def __init__(self, f_dyn, dm_state, dm_act, nb_steps):
         super(AnalyticalLinearDynamics, self).__init__(dm_state, dm_act, nb_steps)
 
-        self.i = f_init
         self.f = f_dyn
 
         self.dfdx = jacobian(self.f, 0)
         self.dfdu = jacobian(self.f, 1)
-
-    def evali(self):
-        return self.i()
 
     def evalf(self, x, u):
         return self.f(x, u)
@@ -123,6 +112,7 @@ class AnalyticalLinearDynamics(LinearDynamics):
         _c = self.evalf(x, u) - _A @ x - _B @ u
 
         return _A, _B, _c
+
 
 class LinearControl:
     def __init__(self, dm_state, dm_act, nb_steps):
